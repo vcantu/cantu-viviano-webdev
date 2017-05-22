@@ -8,7 +8,7 @@ This dashboard is currently being hosted in Heroku and can be found at:
 [https://cantu-viviano-webdev.herokuapp.com/](https://cantu-viviano-webdev.herokuapp.com/)
 
 You can find the class assignment here:
-[comming soon]()
+[https://cantu-viviano-webdev.herokuapp.com/assignment](https://cantu-viviano-webdev.herokuapp.com/assignment)
 
 And the final class project here:
 [comming soon]()
