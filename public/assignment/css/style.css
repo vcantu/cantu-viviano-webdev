@@ -1,7 +1,83 @@
-input.form-control {
+input.form-control,
+textarea.form-control,
+select.form-control {
     margin-bottom: 5px;
 }
 
 body {
-    padding-top: 36px;
+    margin-top: 70px;
+    margin-bottom: 60px;
+}
+
+.navbar {
+    background-color: royalblue;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.back-arrow {
+    padding-right: 0px;
+}
+
+.scrollable-left {
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    overflow: scroll;
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.pg-navbar {
+    background-color: lightgray;
+}
+
+.pg-navbar .navbar-brand {
+    color: black;
+}
+
+@media (min-width: 768px) {
+    .col-sm-8 {
+        margin-left: 33%;
+    }
+}
+
+.pg-widget {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.pg-toolbar {
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    right: 0px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 10px;
+    opacity: 0.8;
+}
+
+.pg-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.pg-video iframe,
+.pg-video object,
+.pg-video embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
