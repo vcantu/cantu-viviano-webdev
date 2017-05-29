@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta charset="UTF-8">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="../../css/style.css" rel="stylesheet"/>
-    <title>Widget Chooser</title>
-</head>
-<body>
-
 <nav class="pg-navbar navbar-fixed-top">
     <div class="navbar-header">
-        <a href="widget-list.html"
+        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}"
            class="back-arrow navbar-brand glyphicon glyphicon-chevron-left"></a>
         <a class="navbar-brand"
            href="#"><b>Widget Chooser</b></a>
@@ -21,7 +10,7 @@
 <div class="container-fluid">
     <ul class="list-group col-lg-12">
         <li class="list-group-item">
-            <a href="widget-heading.html">
+            <a href="widget-heading.view.client.html">
                 Header
             </a>
         </li>
@@ -57,13 +46,13 @@
         </li>
 
         <li class="list-group-item">
-            <a href="widget-image.html">
+            <a href="widget-image.view.client.html">
                 Image
             </a>
         </li>
 
         <li class="list-group-item">
-            <a href="widget-youtube.html">
+            <a href="widget-youtube.view.client.html">
                 YouTube
             </a>
         </li>
@@ -85,10 +74,7 @@
 
 <nav class="pg-navbar navbar-fixed-bottom">
     <div class="navbar-header">
-        <a href="../user/templates/profile.html"
+        <a href="#!/user/{{model.user._id}}"
            class="navbar-brand pull-right glyphicon glyphicon-user"></a>
     </div>
 </nav>
-
-</body>
-</html>

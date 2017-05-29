@@ -1,0 +1,35 @@
+<nav class="pg-navbar navbar-fixed-top">
+    <div class="navbar-header">
+        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page"
+           class="back-arrow navbar-brand glyphicon glyphicon-chevron-left"></a>
+        <a class="navbar-brand"
+           href="widget-heading.view.client.html"><b>Widgets</b></a>
+        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
+           class="navbar-brand pull-right glyphicon glyphicon-plus"></a>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div ng-repeat="widget in model.widgets">
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADING">
+                <ng-include src="'show-templates/widget-heading.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'widget-image.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'widget-youtube.view.client.html'"></ng-include>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="pg-navbar navbar-fixed-bottom">
+    <div class="navbar-header">
+        <a href="#!/user/{{model.user._id}}"
+           class="navbar-brand pull-right glyphicon glyphicon-user"></a>
+    </div>
+</nav>
