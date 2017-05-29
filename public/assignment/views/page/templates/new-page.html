@@ -4,55 +4,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="../css/style.css" rel="stylesheet"/>
-    <title>Edit Widget</title>
+    <link href="../../css/style.css" rel="stylesheet"/>
+    <title>New Page</title>
 </head>
 <body>
 
 <nav class="pg-navbar navbar-fixed-top">
     <div class="navbar-header">
-        <a href="widget-chooser.html"
+        <a href="page-list.view.client.html"
            class="back-arrow navbar-brand glyphicon glyphicon-chevron-left"></a>
         <a class="navbar-brand"
-           href="#"><b>Edit Widget</b></a>
-        <a href="widget-chooser.html"
-           class="navbar-brand pull-right glyphicon glyphicon-plus"></a>
+           href="#"><b>New Page</b></a>
+        <a href="page-list.view.client.html"
+           class="navbar-brand pull-right glyphicon glyphicon-ok"></a>
     </div>
 </nav>
 
 
-<div class="container">
+<div class="container-fluid">
     <label for="name">Name</label>
     <input id="name"
            type="text"
            class="form-control"
-           placeholder="name"/>
+           placeholder="Page Name"/>
 
-    <label for="text">Text</label>
-    <input id="text"
+    <label for="title">Title</label>
+    <input id="title"
            type="text"
            class="form-control"
-           placeholder="text"/>
-
-    <label for="url">URL</label>
-    <input id="url"
-           type="url"
-           class="form-control"
-           placeholder="https://youtu.be/"/>
-
-    <label for="width">Width</label>
-    <input id="width"
-           type="number"
-           class="form-control"
-           placeholder="100%"/>
-
-    <a class="btn btn-danger btn-block"
-       href="#">Delete</a>
+           placeholder="Page Title"/>
 </div>
 
 <nav class="pg-navbar navbar-fixed-bottom">
     <div class="navbar-header">
-        <a href="../user/profile.html"
+        <a href="../user/templates/profile.html"
            class="navbar-brand pull-right glyphicon glyphicon-user"></a>
     </div>
 </nav>
