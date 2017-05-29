@@ -1,6 +1,6 @@
 <nav class="pg-navbar navbar-fixed-top">
     <div class="navbar-header">
-        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}"
+        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
            class="back-arrow navbar-brand glyphicon glyphicon-chevron-left"></a>
         <a class="navbar-brand"
            href="#"><b>Widget Chooser</b></a>
@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <ul class="list-group col-lg-12">
         <li class="list-group-item">
-            <a href="widget-heading.view.client.html">
+            <a ng-click="model.createWidget('HEADING')">
                 Header
             </a>
         </li>
@@ -22,7 +22,7 @@
         </li>
 
         <li class="list-group-item">
-            <a href="#">
+            <a ng-click="model.createWidget('HTML')">
                 HTML
             </a>
         </li>
@@ -46,13 +46,13 @@
         </li>
 
         <li class="list-group-item">
-            <a href="widget-image.view.client.html">
+            <a ng-click="model.createWidget('IMAGE')">
                 Image
             </a>
         </li>
 
         <li class="list-group-item">
-            <a href="widget-youtube.view.client.html">
+            <a ng-click="model.createWidget('YOUTUBE')">
                 YouTube
             </a>
         </li>

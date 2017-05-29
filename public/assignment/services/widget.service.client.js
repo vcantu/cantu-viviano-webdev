@@ -28,28 +28,31 @@
             deleteWidget: deleteWidget
         };
 
-        function createWidget(website) {
-            website._id = (new Date()).getTime() + "";
-            website.created = new Date();
-            website.updated = new Date();
-            widgets.push(website);
+        function createWidget(widgetType) {
+            var widget = { "widgetType": widgetType };
+            widget._id = (new Date()).getTime() + "";
+            widget.created = new Date();
+            widget.updated = new Date();
+            widgets.push(widget);
+            return widget._id;
         }
 
         function updateWidget(websiteId, website) {
             // TODO; this
         }
 
-        function deleteWidget(websiteId) {
-            var website = widgets.find(function (website) {
-                return website._id === websiteId;
+        function deleteWidget(widgetId) {
+            var widget = widgets.find(function (widget) {
+                return widget._id === widgetId;
             });
-            var index = widgets.indexOf(website);
+            var index = widgets.indexOf(widget);
             widgets.splice(index, 1);
         }
 
-        function findWidgetById(websiteId) {
-            return widgets.find(function (website) {
-                return website._id === websiteId;
+        function findWidgetById(widgetId) {
+            console.log('looking for: ' + widgetId);
+            return widgets.find(function (widget) {
+                return widget._id === widgetId;
             });
         }
 

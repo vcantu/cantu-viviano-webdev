@@ -4,11 +4,11 @@
 (function () {
     angular
         .module('WebAppMaker')
-        .controller('pageNewController', pageNewController);
+        .controller('widgetNewController', widgetNewController);
 
-    function pageNewController($routeParams,
+    function widgetNewController($routeParams,
                                   userService,
-                                  pageService,
+                                  widgetService,
                                   $location) {
 
         var model = this;
@@ -19,17 +19,20 @@
         model.pageId = $routeParams['pageId'];
 
         // event handlers
-        model.createPage = createPage;
+        model.createWidget = createWidget;
 
         function init() {
         }
         init();
 
         // implementation
-        function createPage(page) {
-            page.websiteId = model.websiteId;
-            pageService.createPage(page);
-            $location.url('/user/' + model.user._id + '/website/' + model.websiteId  + '/page');
+        function createWidget(widgetType) {
+            var widgetId = widgetService.createWidget(widgetType);
+            $location.url(
+                '/user/' + model.user._id +
+                '/website/'+ model.websiteId  +
+                '/page/' + model.pageId +
+                '/widget/' + widgetId);
         }
     }
 })();
