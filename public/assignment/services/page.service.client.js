@@ -6,13 +6,7 @@
         .module('WebAppMaker')
         .factory('pageService', pageService);
 
-    function pageService() {
-
-        var pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
-        ];
+    function pageService($http) {
 
         return {
             createPage: createPage,
@@ -26,37 +20,38 @@
             page._id = (new Date()).getTime() + "";
             page.created = new Date();
             page.updated = new Date();
-            pages.push(page);
+            return $http.post("/api/page/", page)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
         function updatePage(pageId, page) {
-            // TODO; this
+            return $http.put("/api/page/" + pageId, page)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
         function deletePage(pageId) {
-            var page = pages.find(function (page) {
-                return page._id === pageId;
-            });
-            var index = pages.indexOf(page);
-            pages.splice(index, 1);
+            return $http.delete("/api/page/" + pageId)
+                .then(function (res) {
+                    return res.data;
+                });
         }
 
         function findPageById(pageId) {
-            return pages.find(function (page) {
-                return page._id === pageId;
-            });
+            return $http.get("/api/page/" + pageId)
+                .then(function (res) {
+                    return res.data;
+                })
         }
 
         function findPagesByWebsiteId(websiteId) {
-            var resultSet = [];
-            for(var w in pages) {
-                if(pages[w].websiteId === websiteId) {
-                    // websites[w].created = new Date();
-                    // websites[w].updated = new Date();
-                    resultSet.push(pages[w]);
-                }
-            }
-            return resultSet;
+            return $http.get("/api/page?websiteId=" + websiteId)
+                .then(function (res) {
+                    return res.data;
+                })
         }
     }
 })();

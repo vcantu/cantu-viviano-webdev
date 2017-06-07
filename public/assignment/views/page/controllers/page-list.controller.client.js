@@ -11,10 +11,16 @@
         var model = this;
         var userID = $routeParams['userId'];
         model.websiteID = $routeParams['websiteId'];
-        model.user = userService.findUserById(userID);
+        userService.findUserById(userID)
+            .then(function (user) {
+                model.user = user;
+            });
 
         function init() {
-            model.pages = pageService.findPagesByWebsiteId(model.websiteID);
+            pageService.findPagesByWebsiteId(model.websiteID)
+                .then(function (pages) {
+                    model.pages = pages;
+                })
         }
         init();
     }

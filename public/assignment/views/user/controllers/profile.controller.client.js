@@ -11,6 +11,15 @@
         var model = this;
         var userId = $routeParams['userId'];
 
-        model.user = userService.findUserById(userId);
+        model.user = userService.findUserById(userId)
+            .then(function (user) {
+               model.user = user;
+            });
+
+        model.saveUser = function () {
+            userService.updateUser(model.user._id, model.user);
+        }
+
+
     }
 })();

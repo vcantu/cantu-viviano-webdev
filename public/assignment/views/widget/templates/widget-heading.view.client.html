@@ -1,9 +1,28 @@
-<div class="pg-widget">
-    <div class="pg-toolbar">
-        <a href="#!">
+<li>
+    <div class="float-right">
+        <a href="#/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
         </a>
         <span class="glyphicon glyphicon-align-justify"></span>
     </div>
-    <h1>GIZMODO</h1>
-</div>
+    <div ng-switch="widget.size">
+        <div ng-switch-when=1>
+            <h1>{{widget.text}}</h1>
+        </div>
+        <div ng-switch-when=2>
+            <h2>{{widget.text}}</h2>
+        </div>
+        <div ng-switch-when=3>
+            <h3>{{widget.text}}</h3>
+        </div>
+        <div ng-switch-when=4>
+            <h4>{{widget.text}}</h4>
+        </div>
+        <div ng-switch-when=5>
+            <h5>{{widget.text}}</h5>
+        </div>
+        <div ng-switch-when=6>
+            <h6>{{widget.text}}</h6>
+        </div>
+    </div>
+</li>

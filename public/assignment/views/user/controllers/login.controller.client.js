@@ -11,14 +11,20 @@
 
         model.login = function (username, password) {
 
-            var found = userService.findUserByCredentials(username, password);
+            userService.findUserByCredentials(username, password)
+                .then(function (users) {
+                    if(users.length > 0) {
+                        $location.url('/user/' + users[0]._id);
+                    } else {
+                        model.message = "Username " + username + " not found, please try again";
+                    }
+                })
+                .catch(function (error) {
+                    model.message = "Username " + username + " not found, please try again";
+                });
+            
 
-            if(found !== null) {
-                $location.url('/user/' + found._id);
-                // $scope.message = "Welcome " + username;
-            } else {
-                model.message = "Username " + username + " not found, please try again";
-            }
+
         };
     }
 })();

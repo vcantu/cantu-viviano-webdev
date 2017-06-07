@@ -14,7 +14,10 @@
         var model = this;
         var userId = $routeParams['userId'];
 
-        model.user = userService.findUserById(userId);
+        userService.findUserById(userId)
+            .then(function (user) {
+                model.user = user;
+            });
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
@@ -27,12 +30,20 @@
 
         // implementation
         function createWidget(widgetType) {
-            var widgetId = widgetService.createWidget(widgetType);
-            $location.url(
-                '/user/' + model.user._id +
-                '/website/'+ model.websiteId  +
-                '/page/' + model.pageId +
-                '/widget/' + widgetId);
+            var widget = {};
+            widget.widgetType = widgetType;
+            widget.pageId = model.pageId;
+
+            console.log('creating widget', widget);
+            widgetService.createWidget(widget)
+                .then(function (widget) {
+                    $location.url(
+                        '/user/' + model.user._id +
+                        '/website/'+ model.websiteId  +
+                        '/page/' + model.pageId +
+                        '/widget/' + widget._id);
+                })
+
         }
     }
 })();

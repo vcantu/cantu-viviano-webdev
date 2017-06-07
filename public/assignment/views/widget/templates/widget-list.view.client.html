@@ -15,13 +15,13 @@
     <div ng-repeat="widget in model.widgets">
         <div ng-switch="widget.widgetType">
             <div ng-switch-when="HEADING">
-                <ng-include src="'show-templates/widget-heading.view.client.html'"></ng-include>
+                <ng-include src="'views/widget/templates/widget-heading.view.client.html'"></ng-include>
             </div>
             <div ng-switch-when="IMAGE">
-                <ng-include src="'widget-image.view.client.html'"></ng-include>
+                <ng-include src="'views/widget/templates/widget-image.view.client.html'"></ng-include>
             </div>
             <div ng-switch-when="YOUTUBE">
-                <ng-include src="'widget-youtube.view.client.html'"></ng-include>
+                <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
             </div>
         </div>
     </div>

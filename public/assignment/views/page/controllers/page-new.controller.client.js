@@ -14,22 +14,26 @@
         var model = this;
         var userId = $routeParams['userId'];
 
-        model.user = userService.findUserById(userId);
+        userService.findUserById(userId)
+            .then(function (user) {
+                model.user = user;
+            });
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
         // event handlers
         model.createPage = createPage;
 
-        function init() {
-        }
-        init();
-
         // implementation
         function createPage(page) {
             page.websiteId = model.websiteId;
-            pageService.createPage(page);
-            $location.url('/user/' + model.user._id + '/website/' + model.websiteId  + '/page');
+            pageService.createPage(page)
+                .then(function () {
+                    $location.url(
+                        '/user/' + model.user._id +
+                        '/website/' + model.websiteId  +
+                        '/page');
+                })
         }
     }
 })();

@@ -26,18 +26,29 @@
                 return;
             }
 
-            var found = userService.findUserByUsername(username);
-
-            if(found !== null) {
-                model.error = "Username is not available";
-            } else {
+            userService.findUserByUsername(username)
+                .then(function (users) {
+                    console.log(users);
+                    if (users.length > 0)
+                        model.error = "Username is not available";
+                    else
+                        createUser()
+                })
+                .catch(function (error) {
+                    console.log('error')
+                    createUser()
+                });
+            
+            function createUser() {
                 var user = {
                     username: username,
                     password: password
                 };
                 // model.message = user;
-                userService.createUser(user);
-                $location.url('/user/' + user._id);
+                userService.createUser(user)
+                    .then(function (user) {
+                        $location.url('/user/' + user._id);
+                    })
             }
         }
     }

@@ -13,7 +13,11 @@
 
         var model = this;
         var userId = $routeParams['userId'];
-        model.user = userService.findUserById(userId);
+        userService.findUserById(userId)
+            .then(function (user) {
+                model.user = user;
+            });
+
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
@@ -24,25 +28,43 @@
         model.deletePage = deletePage;
 
         function init() {
-            model.page = pageService.findPageById(model.pageId);
+            pageService.findPageById(model.pageId)
+                .then(function (page) {
+                    model.page = page;
+                })
         }
         init();
 
         // implementation
         function createPage(page) {
             page.websiteId = model.websiteId;
-            pageService.createPage(page);
-            $location.url('/user/' + model.user._id + '/website/' + model.websiteId  + '/page');
+            pageService.createPage(page)
+                .then(function () {
+                    $location.url(
+                        '/user/' + model.user._id +
+                        '/website/' + model.websiteId  +
+                        '/page');
+                })
         }
 
         function updatePage(page) {
-            pageService.updatePage(model.pageId, page);
-            $location.url('/user/' + model.user._id + '/website/' + model.websiteId  + '/page');
+            pageService.updatePage(model.pageId, page)
+                .then(function () {
+                    $location.url(
+                        '/user/' + model.user._id +
+                        '/website/' + model.websiteId  +
+                        '/page');
+                })
         }
 
-        function deletePage(pageId) {
-            pageService.deletePage(pageId);
-            $location.url('/user/' + model.user._id + '/website/' + model.websiteId + '/page');
+        function deletePage(page) {
+            pageService.deletePage(page._id)
+                .then(function () {
+                    $location.url(
+                        '/user/' + model.user._id +
+                        '/website/' + model.websiteId  +
+                        '/page');
+                })
         }
     }
 })();

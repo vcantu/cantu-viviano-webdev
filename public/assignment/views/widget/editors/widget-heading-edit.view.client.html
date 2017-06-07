@@ -1,10 +1,10 @@
 <nav class="pg-navbar navbar-fixed-top">
     <div class="navbar-header">
-        <a href="widget-chooser.view.client.html"
+        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
            class="back-arrow navbar-brand glyphicon glyphicon-chevron-left"></a>
         <a class="navbar-brand"
            href="#"><b>Edit Widget</b></a>
-        <a href="widget-chooser.view.client.html"
+        <a ng-click="model.updateWidget(model.widget)"
            class="navbar-brand pull-right glyphicon glyphicon-plus"></a>
     </div>
 </nav>
@@ -12,19 +12,22 @@
 
 <div class="container">
     <label for="name">Name</label>
-    <input id="name"
+    <input ng-model="model.widget.name"
+           id="name"
            type="text"
            class="form-control"
            placeholder="name"/>
 
     <label for="text">Text</label>
-    <input id="text"
+    <input ng-model="model.widget.text"
+           id="text"
            type="text"
            class="form-control"
            placeholder="text"/>
 
     <label for="size">Size</label>
-    <input id="size"
+    <input ng-model="model.widget.size"
+           id="size"
            type="number"
            class="form-control"
            placeholder="1"/>
@@ -35,7 +38,7 @@
 
 <nav class="pg-navbar navbar-fixed-bottom">
     <div class="navbar-header">
-        <a href="../user/templates/profile.html"
+        <a href="#!/user/{{model.user._id}}"
            class="navbar-brand pull-right glyphicon glyphicon-user"></a>
     </div>
 </nav>

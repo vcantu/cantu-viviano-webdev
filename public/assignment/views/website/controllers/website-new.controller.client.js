@@ -14,21 +14,29 @@
         var model = this;
         var userId = $routeParams['userId'];
 
-        model.user = userService.findUserById(userId);
+        userService.findUserById(userId)
+            .then(function (user) {
+                model.user = user;
+            });
 
         // event handlers
         model.createWebsite = createWebsite;
 
         function init() {
-            model.websites = websiteService.findAllWebsitesForUser(userId);
+            websiteService.findAllWebsitesForUser(userId)
+                .then(function (websites) {
+                    model.websites = websites;
+                });
         }
         init();
 
         // implementation
         function createWebsite(website) {
             website.developerId = userId;
-            websiteService.createWebsite(website);
-            $location.url('/user/'+userId+'/website');
+            websiteService.createWebsite(website)
+                .then(function (res) {
+                    $location.url('/user/' + userId + '/website');
+                })
         }
     }
 })();
