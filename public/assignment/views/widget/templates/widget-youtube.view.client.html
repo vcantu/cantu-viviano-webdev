@@ -1,6 +1,6 @@
-<li>
+<div>
     <div class="float-right">
-        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}">
+        <a href="#!/user/{{model.user._id}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
             <span class="glyphicon glyphicon-cog"></span>
         </a>
         <span class="glyphicon glyphicon-align-justify"></span>
@@ -8,4 +8,4 @@
     <div class="embed-responsive embed-responsive-4by3">
         <iframe class="embed-responsive-item" ng-src={{model.getEmbededUrl(widget.url)}}></iframe>
     </div>
-</li>
+</div>
