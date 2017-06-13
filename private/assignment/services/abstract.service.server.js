@@ -10,86 +10,63 @@ module.exports = function (app, urlName, objects) {
     app.put('/api/' + urlName + '/:id', update);
     app.delete('/api/' + urlName + '/:id', remove);
 
-    var api = {
-        create : create
-    };
-    return api;
+
+    var model = require('../models/' + urlName + '/' + urlName + '.model.server.js');
 
     function filter(req, res) {
-        filterBy(req.query,
-            function (objs) {
+        model.
+            filterObj(req.query)
+            .then(function (objs) {
                 res.json(objs);
+            }, function (err) {
+                res.sendStatus(404);
             })
     }
 
     function find(req, res) {
-        findBy(req.params,
-            function (i) {
-                res.json(objects[i]);
-            },
-            function () {
+        model
+            .findObj({_id: req.params['id']})
+            .then(function(obj) {
+                if (obj != null)
+                    res.json(obj);
+                else
+                    res.sendStatus(404);
+            }, function (err) {
                 res.sendStatus(404);
             })
     }
 
     function create(req, res) {
         var newObject = req.body;
-        //ensure object has an id
-        newObject._id =  newObject._id ? newObject._id : new Date().getTime() + "";
-
-        objects.push(newObject);
-        res.json(newObject);
+        model
+            .createObj(newObject)
+            .then(function (obj) {
+                res.json(obj);
+            }, function (err) {
+                res.sendStatus(404);
+            })
     }
 
     function update(req, res) {
-        findBy(req.params,
-            function (i) {
-                objects[i] = req.body;
-                res.json(req.body);
-            },
-            function () {
-                res.sendStatus(404);
-            })
+        model
+            .updateObj(
+                {_id: req.params['id']},
+                req.body)
+            .then(function (obj) {
+            res.json(obj);
+        }, function (err) {
+            res.sendStatus(404);
+        })
     }
 
     function remove(req, res) {
-        findBy(req.params,
-            function (i) {
-                var r = objects.splice(i, 1);
-                res.json(r);
-            },
-            function () {
+        model
+            .remove({_id: req.params['id']})
+            .then(function (obj) {
+                res.json(obj);
+            }, function (err) {
                 res.sendStatus(404);
             })
-    }
-
-
-    // helpers ---------------------------------
-
-    function filterBy(query, callback) {
-        var result = [];
-        const keys = Object.keys(query);
-
-        for (var i = 0; i < objects.length; i++) {
-            if (keys.reduce(
-                function (acc, key) {
-                    return acc && query[key] === objects[i][key]
-                }, true)) {
-                result.push(objects[i]);
-            }
-        }
-        callback(result);
-    }
-
-    function findBy(params, success, failure) {
-        var id = params.id;
-        for (var i = 0; i < objects.length; i++) {
-            if (objects[i]._id == id) {
-                success(i);
-                return;
-            }
-        }
-        failure();
     }
 
 };
