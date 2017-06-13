@@ -2,20 +2,25 @@
  * Created by vcantu on 6/12/17.
  */
 var mongoose = require('mongoose');
-var userSchema = mongoose.Schema({
-    username: {type: String, require: true},
-    password: {type: String, require: true},
-    firstName: String,
-    lastName: String,
-
-    _websites: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"WebsiteModel"}
-    ],
-    _following: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"UserModel"}
-    ],
-
-    dateCreated: {type: Date, default: Date.now},
-    rating: {type: Number, default: 0}
-}, {collection: "user"});
-module.exports = userSchema;
+var widgetSchema = mongoose.Schema({
+    _page : {type: mongoose.Schema.ObjectId, ref: "PageModel"},
+    widgetType: {
+        type: String,
+        enum: ['HEADING', 'IMAGE', 'HTML', 'YOUTUBE', 'INPUT']
+    },
+    name: String,
+    placeholder: String,
+    description: String,
+    size: Number,
+    rows: Number,
+    width: String,
+    height: String,
+    text: String,
+    url: String,
+    class: String,
+    icon: String,
+    deletable: Boolean,
+    formatted: Boolean,
+    dateCreated: {type: Date, default: Date.now}
+}, {collection: 'widget'});
+module.exports = widgetSchema;

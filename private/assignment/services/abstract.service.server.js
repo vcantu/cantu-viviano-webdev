@@ -68,7 +68,7 @@ module.exports = function (app, urlName, model) {
 
     function remove(req, res) {
         model
-            .remove({_id: req.params['id']})
+            .removeObj(req.params['id'])
             .then(function (obj) {
                 res.json(obj);
             }, function (err) {

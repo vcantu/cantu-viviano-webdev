@@ -9,7 +9,6 @@ var model = Model('WebsiteModel', schema);
 var userModel = require('../../models/user/user.model.server');
 
 model.createObj = function(obj) {
-    console.log("new website obj");
     var userId = obj.developerId;
     obj._user = obj.developerId;
     delete obj.developerId;
@@ -22,13 +21,13 @@ model.createObj = function(obj) {
         });
 };
 
-model.removeObj = function(id, obj) {
-  return model
-      .remove({_id: id})
-      .then(function (status) {
-          return userModel
-              .removeWebsite(userId, obj._id);
-      })
+model.removeObj = function(id, userId) {
+    return model
+        .remove({_id: id})
+        .then(function (obj) {
+            return userModel
+                .removeWebsite(userId, id);
+        });
 };
 
 model.findAllSites = function (userId) {
@@ -37,5 +36,24 @@ model.findAllSites = function (userId) {
         .populate('_user', 'username')
         .exec();
 }
+
+model.addPage = function(id, pageId) {
+    return model
+        .findById(id)
+        .then(function (website) {
+            website._pages.push(pageId);
+            return website.save();
+        })
+};
+
+model.removePage = function (id, pageId) {
+    return model
+        .findById(id)
+        .then(function (website) {
+            var index = website._pages.indexOf(pageId);
+            website._pages.splice(index, 1);
+            return website.save();
+        })
+};
 
 module.exports = model;

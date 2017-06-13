@@ -17,8 +17,6 @@
         };
 
         function createWidget(widget) {
-
-            widget._id = (new Date()).getTime() + "";
             widget.created = new Date();
             widget.updated = new Date();
             return $http.post("/api/widget", widget)

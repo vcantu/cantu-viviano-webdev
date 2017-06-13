@@ -15,10 +15,11 @@ module.exports = function (app) {
         { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
     ];
 
-    app.get('/api/website', filter);
 
+    app.get('/api/website', filter);
     var model = require('../models/website/website.model.server.js');
     var service = Service(app, 'website', model);
+
 
     function filter(req, res) {
         if (req.query.developerId) {

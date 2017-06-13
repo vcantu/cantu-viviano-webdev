@@ -17,6 +17,20 @@ module.exports = function (app) {
         { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     ];
 
+    app.get('/api/widget', filter);
     var model = require('../models/widget/widget.model.server.js')
-    var service = Service(app, 'website', model);
+    var service = Service(app, 'widget', model);
+
+    function filter(req, res) {
+        if (req.query.pageId) {
+            model
+                .findAllWidgets(req.query.pageId)
+                .then(function (response) {
+                    res.json(response);
+                })
+        }
+        else {
+            service.filter(req, res);
+        }
+    }
 };
