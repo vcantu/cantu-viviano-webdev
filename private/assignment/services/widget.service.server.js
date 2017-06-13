@@ -17,5 +17,6 @@ module.exports = function (app) {
         { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     ];
 
-    this.prototype = new Service(app, 'widget', widgets);
+    var model = require('../models/widget/widget.model.server.js')
+    var service = Service(app, 'website', model);
 };

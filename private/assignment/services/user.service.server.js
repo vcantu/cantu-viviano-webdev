@@ -12,5 +12,7 @@ module.exports = function (app) {
         {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
-    this.prototype = new Service(app, 'user', users);
+
+    var model = require('../models/user/user.model.server.js');
+    var service = Service(app, 'user', model);
 };

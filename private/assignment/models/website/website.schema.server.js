@@ -2,20 +2,10 @@
  * Created by vcantu on 6/12/17.
  */
 var mongoose = require('mongoose');
-var userSchema = mongoose.Schema({
-    username: {type: String, require: true},
-    password: {type: String, require: true},
-    firstName: String,
-    lastName: String,
-
-    _websites: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"WebsiteModel"}
-    ],
-    _following: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"UserModel"}
-    ],
-
-    dateCreated: {type: Date, default: Date.now},
-    rating: {type: Number, default: 0}
-}, {collection: "user"});
-module.exports = userSchema;
+var websiteSchema = mongoose.Schema({
+    _user : {type: mongoose.Schema.ObjectId, ref: "UserModel"},
+    name: String,
+    description: String,
+    dateCreated: {type: Date, default: Date.now}
+}, {collection: 'website'});
+module.exports = websiteSchema;

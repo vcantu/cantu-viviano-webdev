@@ -17,7 +17,6 @@
         };
 
         function createWebsite(website) {
-            website._id = (new Date()).getTime() + "";
             website.created = new Date();
             website.updated = new Date();
 
@@ -51,6 +50,7 @@
         function findAllWebsitesForUser(userId) {
             return $http.get("/api/website?developerId=" + userId)
                 .then(function (res) {
+                    console.log(res);
                     return res.data;
                 })
         }

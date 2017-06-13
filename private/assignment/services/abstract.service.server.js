@@ -2,7 +2,15 @@
  * Created by vcantu on 6/6/17.
  */
 
-module.exports = function (app, urlName, objects) {
+module.exports = function (app, urlName, model) {
+
+    var api = {
+        create: create,
+        filter: filter,
+        find: find,
+        update: update,
+        remove: remove
+    };
 
     app.post('/api/' + urlName, create);
     app.get('/api/' + urlName, filter);
@@ -10,8 +18,7 @@ module.exports = function (app, urlName, objects) {
     app.put('/api/' + urlName + '/:id', update);
     app.delete('/api/' + urlName + '/:id', remove);
 
-
-    var model = require('../models/' + urlName + '/' + urlName + '.model.server.js');
+    return api;
 
     function filter(req, res) {
         model.

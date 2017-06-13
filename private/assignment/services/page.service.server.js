@@ -11,5 +11,6 @@ module.exports = function (app) {
         { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
     ];
 
-    this.prototype = new Service(app, 'page', pages);
+    var model = require('../models/page/page.model.server.js')
+    var service = Service(app, 'website', model);
 };

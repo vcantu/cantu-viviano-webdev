@@ -17,7 +17,6 @@
         };
 
         function createPage(page) {
-            page._id = (new Date()).getTime() + "";
             page.created = new Date();
             page.updated = new Date();
             return $http.post("/api/page/", page)
