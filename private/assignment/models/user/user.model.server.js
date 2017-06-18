@@ -8,7 +8,7 @@ var schema = require('./user.schema.server');
 var model = Model('UserModel', schema);
 
 model.findUserByFacebookId = function (facebookId) {
-    return user.findOne({'facebook.id': facebookId});
+    return model.findOne({'facebook.id': facebookId});
 };
 
 model.findUserByCredentials = function (username, password) {

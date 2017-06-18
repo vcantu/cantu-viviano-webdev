@@ -12,6 +12,8 @@ var facebookConfig = {
     callbackURL  : process.env.FACEBOOK_CALLBACK_URL
 };
 
+var bcrypt = require('bcrypt-nodejs');
+
 module.exports = function (app) {
 
     var users = [
@@ -29,8 +31,8 @@ module.exports = function (app) {
             passport.authenticate('facebook', { scope : 'email'}));
     app.get ('/auth/facebook/callback',
             passport.authenticate('facebook', {
-                successRedirect: '/#!/profile',
-                failureRedirect: '/#!/login'
+                successRedirect: '/assignment/index.html#!/profile',
+                failureRedirect: '/assignment/index.html#!/login'
             }));
 
     var model = require('../models/user/user.model.server.js');
@@ -48,6 +50,7 @@ module.exports = function (app) {
 
     function register(req, res) {
         var newObject = req.body;
+        newObject.password = bcrypt.hashSync(newObject.password);
         model
             .createObj(newObject)
             .then(function (obj) {
@@ -71,16 +74,37 @@ module.exports = function (app) {
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     function facebookStrategy(token, refreshToken, profile, done) {
-        model.findUserByFacebookId(profile.id);
+        model.findUserByFacebookId(profile.id)
+            .then(function (res) {
+                if (res) {
+                    //authenticated
+                    done(null, res);
+                }
+                else {
+                    var names = profile.displayName.split(' ');
+                    var newUser = {
+                        firstName: names[0],
+                        lastName: names[names.length - 1],
+                        facebook: {
+                            id: profile.id,
+                            token: token
+                        }
+                    };
+                    model.createObj(newUser)
+                        .then(function (response) {
+                            done(null, response);
+                        })
+                }
+            })
     }
 
 
     passport.use(new LocalStrategy(localStrategy));
     function localStrategy(username, password, done) {
-        model.findUserByCredentials(username, password)
-            .then(
-                function(user) {
-                    if (user.username === username && user.password === password) {
+        model.findObj({username: username})
+            .then(function(user) {
+                    if (user.username === username &&
+                        bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     }
                     else {
@@ -89,8 +113,7 @@ module.exports = function (app) {
                 },
                 function(err) {
                     if (err) { return done(err); }
-                }
-            )
+                });
     }
 
     passport.serializeUser(serializeUser);

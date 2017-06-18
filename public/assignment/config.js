@@ -80,9 +80,12 @@
 
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
-        $http.get('/api/loggedin').succes(function(user) {
+        console.log('checking if logged in...')
+        $http.get('/api/loggedin').then(function(user) {
+            console.log(user.data);
             $rootScope.errorMessage = null;
             if (user.data !== '0') {
+                $rootScope.currentUser = user.data;
                 deferred.resolve(user.data);
             } else {
                 deferred.reject();
