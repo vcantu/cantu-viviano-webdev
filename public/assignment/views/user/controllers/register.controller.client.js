@@ -6,7 +6,7 @@
         .module('WebAppMaker')
         .controller('registerController', registerController);
 
-    function registerController($location, userService) {
+    function registerController($location, userService, $rootScope) {
 
         var model = this;
 
@@ -46,8 +46,10 @@
                 };
                 // model.message = user;
                 userService.createUser(user)
-                    .then(function (user) {
-                        $location.url('/user/' + user._id);
+                    .then(function (response) {
+                        var newUser = response.data;
+                        $rootScope.currentUser = newUser;
+                        $location.url('/profile');
                     })
             }
         }

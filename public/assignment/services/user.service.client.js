@@ -14,14 +14,13 @@
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            login: login,
+            logout: logout
         };
 
         function createUser(user) {
-            return $http.post("/api/user", user)
-                .then(function (res) {
-                    return res.data;
-                });
+            return $http.post("/api/register", user);
         }
 
         function findUserByUsername(username) {
@@ -57,6 +56,14 @@
                 .then(function (res) {
                     return res.data;
                 })
+        }
+
+        function login(user) {
+            return $http.post("/api/login", user);
+        }
+
+        function logout() {
+            return $http.post("/api/logout");
         }
     }
 })();

@@ -22,10 +22,11 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId', {
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: { loggedin: checkLoggedin }
             })
             // Websites
             .when('/user/:userId/website', {
@@ -76,4 +77,19 @@
                 controllerAs: 'model'
             })
     }
+
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/loggedin').succes(function(user) {
+            $rootScope.errorMessage = null;
+            if (user.data !== '0') {
+                deferred.resolve(user.data);
+            } else {
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+        return deferred.promise;
+    };
+
 })();

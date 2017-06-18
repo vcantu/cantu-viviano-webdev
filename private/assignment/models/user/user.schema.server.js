@@ -16,6 +16,10 @@ var userSchema = mongoose.Schema({
     ],
 
     dateCreated: {type: Date, default: Date.now},
-    rating: {type: Number, default: 0}
+    rating: {type: Number, default: 0},
+    facebook: {
+        id:     String,
+        token:  String,
+    }
 }, {collection: "user"});
 module.exports = userSchema;

@@ -6,15 +6,18 @@
         .module('WebAppMaker')
         .controller('loginController', loginController);
 
-    function loginController($location, userService) {
+    function loginController($location, userService, $rootScope) {
         var model = this;
 
         model.login = function (username, password) {
-
-            userService.findUserByCredentials(username, password)
-                .then(function (users) {
-                    if(users.length > 0) {
-                        $location.url('/user/' + users[0]._id);
+            var user = { username: username, password: password };
+            console.log('authenticating');
+            userService.login(user)
+                .then(function (res) {
+                    console.log(res);
+                    if(res.status == 200) {
+                        $rootScope.currentUser = res.data;
+                        $location.url('/profile');
                     } else {
                         model.message = "Username " + username + " not found, please try again";
                     }
@@ -22,9 +25,6 @@
                 .catch(function (error) {
                     model.message = "Username " + username + " not found, please try again";
                 });
-            
-
-
         };
     }
 })();
