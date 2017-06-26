@@ -18,6 +18,7 @@ app.use(passport.session());
 
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
+app.use('/home', express.static(__dirname + '/home'));
 
 // require private server side assignment
 require("./private/assignment/app.js")(app);

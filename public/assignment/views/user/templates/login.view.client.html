@@ -5,19 +5,21 @@
         {{model.message}}
     </div>
 
-    <label for="username">Username</label>
-    <input id="username"
-           ng-model="username"
-           type="text"
-           class="form-control"
-           placeholder="Username"/>
+    <form>
+        <label for="username">Username</label>
+        <input id="username"
+               ng-model="username"
+               type="text"
+               class="form-control"
+               placeholder="Username"/>
 
-    <label for="password">Username</label>
-    <input id="password"
-           ng-model="password"
-           type="password"
-           class="form-control"
-           placeholder="Password"/>
+        <label for="password">Username</label>
+        <input id="password"
+               ng-model="password"
+               type="password"
+               class="form-control"
+               placeholder="Password"/>
+    </form>
 
     <a ng-click="model.login(username, password)"
        class="btn btn-block btn-primary">Login</a>
